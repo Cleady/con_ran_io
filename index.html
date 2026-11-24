@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>SLITHER.IO — Neon Arena</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <canvas id="game-canvas"></canvas>
+
+    <!-- Main Menu / Lobby Overlay -->
+    <div id="menu-overlay" class="overlay visible">
+      <div class="glass-card lobby-card">
+        <div class="logo-wrap">
+          <h1 class="game-title">slither<span class="title-dot">.io</span></h1>
+          <p class="subtitle">NEON ARENA</p>
+        </div>
+
+        <div class="input-group">
+          <input
+            id="nickname-input"
+            type="text"
+            maxlength="16"
+            placeholder="Enter Nickname..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+
+        <div class="skin-selector">
+          <button id="skin-prev" class="icon-btn" aria-label="Previous Skin" type="button">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="skin-preview-box">
+            <canvas id="skin-preview-canvas" width="240" height="72"></canvas>
+            <div id="skin-name" class="skin-name">Neon Cyan</div>
+          </div>
+          <button id="skin-next" class="icon-btn" aria-label="Next Skin" type="button">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <button id="play-btn" class="primary-btn" type="button">
+          <span>PLAY</span>
+        </button>
+
+        <div class="controls-hint">
+          <span>Mouse to steer</span>
+          <span class="hint-sep">&bull;</span>
+          <span>Click / Space to boost</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- In-Game HUD -->
+    <div id="hud" class="hud hidden">
+      <!-- Top-Right Leaderboard -->
+      <div class="hud-panel leaderboard-panel">
+        <div class="panel-header">Leaderboard</div>
+        <ol id="leaderboard-list" class="leaderboard-list"></ol>
+        <div id="leaderboard-player-extra" class="leaderboard-extra hidden"></div>
+      </div>
+
+      <!-- Kill Feed Toast -->
+      <div id="kill-banner" class="kill-banner hidden"></div>
+
+      <!-- Bottom-Left Stats & Controls -->
+      <div class="hud-panel stats-panel">
+        <div class="stat-row main-stat">
+          <span class="stat-label">Length</span>
+          <span id="hud-length" class="stat-value">30</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Rank</span>
+          <span id="hud-rank" class="stat-value">1 / 31</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Eliminations</span>
+          <span id="hud-kills" class="stat-value">0</span>
+        </div>
+        <div class="hud-utility-row">
+          <span id="hud-fps" class="fps-badge">60 FPS</span>
+          <button id="mute-btn" class="utility-btn" type="button" title="Toggle Sound">
+            <span id="mute-icon">🔊</span>
+          </button>
+          <button id="names-btn" class="utility-btn active" type="button" title="Toggle Nameplates">
+            <span>ABC</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom-Right Minimap -->
+      <div class="minimap-wrap">
+        <canvas id="minimap-canvas" width="130" height="130"></canvas>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="gameover-overlay" class="overlay hidden">
+      <div class="glass-card gameover-card">
+        <h2 class="gameover-title">ELIMINATED</h2>
+        <p id="death-reason" class="death-reason">Defeated in the arena</p>
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <span class="summary-label">Final Length</span>
+            <span id="stat-final-length" class="summary-value accent-cyan">0</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Peak Rank</span>
+            <span id="stat-peak-rank" class="summary-value accent-gold">#1</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Time Survived</span>
+            <span id="stat-time-survived" class="summary-value">0:00</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Snakes Eliminated</span>
+            <span id="stat-kills" class="summary-value accent-lime">0</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="play-again-btn" class="primary-btn" type="button">PLAY AGAIN</button>
+          <button id="change-skin-btn" class="secondary-btn" type="button">CHANGE SKIN</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
